@@ -3,6 +3,7 @@ import os
 from dotenv.main import load_dotenv
 from discord.ext import commands
 import requests
+import json
 
 load_dotenv()
 

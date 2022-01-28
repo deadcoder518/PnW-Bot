@@ -23,4 +23,5 @@ async def steelsell(ctx):
     nationlink = "https://politicsandwar.com/nation/id="+nationid
     await ctx.send(nationlink)
 
+#running bot
 bot.run(TOKEN)

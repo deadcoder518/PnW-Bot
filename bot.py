@@ -19,9 +19,11 @@ tradeData = requests.get(f"https://politicsandwar.com/api/tradeprice/?resource=s
 tradeData = tradeData.json()
 @bot.command(name="steelsell")
 async def steelsell(ctx):
-    nationid = tradeData["lowestbuy"]["nationid"]
-    nationlink = "https://politicsandwar.com/nation/id="+nationid
-    await ctx.send(nationlink)
+    #nationid = tradeData["lowestbuy"]["nationid"]
+    #nationlink = "https://politicsandwar.com/nation/id="+nationid
+    #await ctx.send(nationlink)
+    index = tradeData["marketindex"]
+    await ctx.send(index)
 
 #running bot
 bot.run(TOKEN)

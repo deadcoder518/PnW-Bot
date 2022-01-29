@@ -25,11 +25,13 @@ tradeData = tradeData.json()
 #fetches buy steel price
 @bot.command(name="steelsell")
 async def steelsell(ctx):
-    nationid = tradeData["lowestbuy"]["nationid"]
-    time = tradeData["lowestbuy"]["date"]
-    nationlink = "https://politicsandwar.com/nation/id="+nationid
-    embed = discord.Embed(url=nationlink)
-    embed.add_field(name="Time of Trade",value=time)
+    nationID = tradeData["lowestbuy"]["nationid"]
+    tradeTime = tradeData["lowestbuy"]["date"]
+    nationLink = "https://politicsandwar.com/nation/id="+nationID
+    nationData = requests.get(f"https://politicsandwar.com/api/nation/id="+nationID+"/&key="+key)
+    embed = discord.Embed(title=nationData["name"],url=nationLink)
+    embed.set_thumbnail(url=nationData["flagurl"])
+    embed.add_field(name="Time of Trade",value=tradeTime)
     await ctx.send(embed=embed)
 
 #running bot

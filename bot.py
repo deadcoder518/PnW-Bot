@@ -19,12 +19,11 @@ async def identify(ctx):
 
 key = os.getenv("API_KEY")
 
-tradeData = requests.get(f"https://politicsandwar.com/api/tradeprice/?resource=steel&key="+key)
-tradeData = tradeData.json()
-
 #fetches buy steel price
 @bot.command(name="steelsell")
 async def steelsell(ctx):
+    tradeData = requests.get(f"https://politicsandwar.com/api/tradeprice/?resource=steel&key="+key)
+    tradeData = tradeData.json()
     nationID = tradeData["lowestbuy"]["nationid"]
     tradeTime = tradeData["lowestbuy"]["date"]
     nationLink = "https://politicsandwar.com/nation/id="+nationID
@@ -33,6 +32,7 @@ async def steelsell(ctx):
     embed = discord.Embed(title=nationData["name"],url=nationLink)
     embed.set_thumbnail(url=nationData["flagurl"])
     embed.add_field(name="Time of Trade",value=tradeTime)
+    #cut down on the requests though!!!!!
     await ctx.send(embed=embed)
 
 #running bot

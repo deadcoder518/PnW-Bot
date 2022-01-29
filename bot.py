@@ -20,6 +20,7 @@ async def identify(ctx):
 async def steelsell(ctx):
     tradeData = requests.get(f"https://politicsandwar.com/api/tradeprice/?resource=steel&key="+str(os.getenv("API_KEY")))
     tradeData = tradeData.json()
+    print(tradeData)
     nationid = tradeData["lowestbuy"]["nationid"]
     nationlink = "https://politicsandwar.com/nation/id="+nationid
     await ctx.send(nationlink)

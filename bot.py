@@ -16,6 +16,7 @@ async def identify(ctx):
     await ctx.send(xen)
     #could've done embeds but they're very easy!
 
+#fetches buy steel price
 @bot.command(name="steelsell")
 async def steelsell(ctx):
     tradeData = requests.get(f"https://politicsandwar.com/api/tradeprice/?resource=steel&key="+str(os.getenv("API_KEY")))

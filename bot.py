@@ -1,3 +1,5 @@
+from datetime import date
+from pydoc import describe
 import discord
 import os
 from dotenv.main import load_dotenv
@@ -24,7 +26,10 @@ tradeData = tradeData.json()
 @bot.command(name="steelsell")
 async def steelsell(ctx):
     nationid = tradeData["lowestbuy"]["nationid"]
+    time = tradeData["lowestbuy"]["date"]
     nationlink = "https://politicsandwar.com/nation/id="+nationid
+    embed = discord.Embed(url=nationlink)
+    embed.add_field(name="Time of Trade",value=date)
     await ctx.send(nationlink)
 
 #running bot

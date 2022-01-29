@@ -3,6 +3,7 @@ import os
 from dotenv.main import load_dotenv
 from discord.ext import commands
 import requests
+import json
 
 load_dotenv()
 
@@ -15,11 +16,14 @@ async def identify(ctx):
     await ctx.send(xen)
     #could've done embeds but they're very easy!
 
+f = open("config.json")
+data = json.load(f)
+key = data["key"]
+
 #fetches buy steel price
 @bot.command(name="steelsell")
 async def steelsell(ctx):
-    key = os.getenv("API_KEY")
-    tradeData = requests.get(f"https://politicsandwar.com/api/tradeprice/?resource=steel&key="+str(key))
+    tradeData = requests.get(f"https://politicsandwar.com/api/tradeprice/?resource=steel&key="+key)
     tradeData = tradeData.json()
     print(tradeData)
     nationid = tradeData["lowestbuy"]["nationid"]

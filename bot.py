@@ -29,6 +29,7 @@ async def steelsell(ctx):
     tradeTime = tradeData["lowestbuy"]["date"]
     nationLink = "https://politicsandwar.com/nation/id="+nationID
     nationData = requests.get(f"https://politicsandwar.com/api/nation/id="+nationID+"/&key="+key)
+    nationData = nationData.json()
     embed = discord.Embed(title=nationData["name"],url=nationLink)
     embed.set_thumbnail(url=nationData["flagurl"])
     embed.add_field(name="Time of Trade",value=tradeTime)

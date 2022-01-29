@@ -18,7 +18,8 @@ async def identify(ctx):
 #fetches buy steel price
 @bot.command(name="steelsell")
 async def steelsell(ctx):
-    tradeData = requests.get(f"https://politicsandwar.com/api/tradeprice/?resource=steel&key=1dc17e101556de")
+    key = os.getenv("API_KEY")
+    tradeData = requests.get(f"https://politicsandwar.com/api/tradeprice/?resource=steel&key="+str(key))
     tradeData = tradeData.json()
     print(tradeData)
     nationid = tradeData["lowestbuy"]["nationid"]

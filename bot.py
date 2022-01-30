@@ -33,10 +33,10 @@ async def tp(ctx, type, resource):
         nationID = tradeData[section]["nationid"]
         nationLink = "https://politicsandwar.com/nation/id="+nationID
         await ctx.send(nationLink)
-        await ctx.send("This nation currently has the best " + type + " for " + resource + ". Hope it's you!")
+        await ctx.send("This nation currently has the best " + type + " for " + resource + ". Hope it's you! If it's not, go undercut now!!!")
     except KeyError:
-        await ctx.send("Can you use me properly please. Make sure you enter tp followed by buy/sell and the resource. e.g.:")
-        await ctx.send("tp buy steel")
+        await ctx.send("Can you use me properly please. Make sure you enter !tp followed by buy/sell and the resource. Like this:")
+        await ctx.send("!tp buy steel")
         #await ctx.send("Enter !help if you're still struggling.")
 
 #running bot

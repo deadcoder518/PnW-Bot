@@ -11,29 +11,33 @@ load_dotenv()
 bot = commands.Bot(command_prefix="!")
 TOKEN = os.getenv("DISCORD_TOKEN")
 
-@bot.command(name="whoxen")
-async def identify(ctx):
-    xen = "Xen is the greatest of all time!"
-    await ctx.send(xen)
-    #could've done embeds but they're very easy!
-
 key = os.getenv("API_KEY")
 
-#fetches buy steel price
-@bot.command(name="steelsell")
-async def steelsell(ctx):
-    tradeData = requests.get(f"https://politicsandwar.com/api/tradeprice/?resource=steel&key="+key)
-    tradeData = tradeData.json()
-    nationID = tradeData["lowestbuy"]["nationid"]
-    tradeTime = tradeData["lowestbuy"]["date"]
-    nationLink = "https://politicsandwar.com/nation/id="+nationID
-    nationData = requests.get(f"https://politicsandwar.com/api/nation/id="+nationID+"/&key="+key)
-    nationData = nationData.json()
-    embed = discord.Embed(title=nationData["name"],url=nationLink)
-    embed.set_thumbnail(url=nationData["flagurl"])
-    embed.add_field(name="Time of Trade",value=tradeTime)
-    #cut down on the requests though!!!!!
-    await ctx.send(embed=embed)
+#test command (checks if bot is working)
+@bot.command(name="test")
+async def test(ctx):
+    await ctx.send("Working!")
+
+#gets tradeprices (highest buy/lowest sell) for any resource
+@bot.command()
+async def tp(ctx, type, resource):
+    """Fetches the current highest buy/lowest sell price of a resource on the GTO."""
+    try:
+        section = ""
+        if type == "sell":
+            section = "lowestbuy"
+        elif type == "buy":
+            section = "highestbuy"
+        tradeData = requests.get(f"https://politicsandwar.com/api/tradeprice/?resource="+resource+"&key="+key)
+        tradeData = tradeData.json()
+        nationID = tradeData[section]["nationid"]
+        nationLink = "https://politicsandwar.com/nation/id="+nationID
+        await ctx.send(nationLink)
+        await ctx.send("This nation currently has the best " + type + " for " + resource + ". Hope it's you!")
+    except KeyError:
+        await ctx.send("Can you use me properly please. Make sure you enter tp followed by buy/sell and the resource. e.g.:")
+        await ctx.send("tp buy steel")
+        #await ctx.send("Enter !help if you're still struggling.")
 
 #running bot
 bot.run(TOKEN)

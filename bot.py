@@ -61,8 +61,8 @@ async def ground(ctx, aSoldiers, aTanks, dSoldiers, dTanks):
         for i in range(100000):
             w = 0
             for i in range(3):
-                aRollValue = random.randrange((0.4*aValue),aValue)
-                dRollValue = random.randrange((0.4*dValue),dValue)
+                aRollValue = random.uniform((0.4*aValue),aValue)
+                dRollValue = random.uniform((0.4*dValue),dValue)
                 if aRollValue > dRollValue:
                     w += 1
             if w == 3:

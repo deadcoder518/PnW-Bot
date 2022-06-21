@@ -79,7 +79,7 @@ async def ground(ctx, aSoldiers, aTanks, dSoldiers, dTanks):
         await ctx.send("Moderate Successes: " + str(moderate) + " (" + str((moderate/100000)*100) + ")")
         await ctx.send("Pyrrhic Victories: " + str(pyrrhic) + " (" + str((pyrrhic/100000)*100) + ")")
         await ctx.send("Utter Failures: " + str(failure) + " (" + str((failure/100000)*100) + ")")
-        await ctx.send("Assuming soldiers are using munitions.")        
+        await ctx.send("Assuming soldiers are using munitionz.")        
     except KeyError:
         await ctx.send("You didn't enter the command properly. Ping Sabo for help because I'm useless and can't help you myself.")
 
